@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: linear-gradient(135deg, #a78bfa, #d8b4fe);
+            font-family: 'Poppins', sans-serif;
+            padding: 30px;
+        }
+
+        h2 {
+            text-align: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 20px;
+            border-collapse: collapse;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            animation: fadeIn 0.7s ease;
+        }
+
+        th {
+            background: #6d28d9;
+            color: white;
+            padding: 12px;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        button {
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            color: white;
+        }
+
+        .update { background: #10b981; }
+        .delete { background: #ef4444; }
+
+        a {
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        /* Popup */
+        #popup {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 320px;
+            background: white;
+            padding: 20px;
+            border-radius: 18px;
+            display: none;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            animation: fadeIn 0.4s;
+        }
+
+        #popup input, #popup textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 6px 0;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+        #popup button {
+            width: 100%;
+            padding: 12px;
+            background: #6d28d9;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>All Registered Users</h2>
+
+<table id="userTable">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Username</th>
+        <th>Actions</th>
+    </tr>
+</table>
+
+<a href="1st.html">← Back to Registration</a>
+
+<!-- Popup -->
+<div id="popup">
+    <h3>Edit User</h3>
+    <input id="upName">
+    <input id="upEmail">
+    <input id="upPhone">
+    <textarea id="upAddress"></textarea>
+    <input id="upUsername">
+    <button onclick="saveUpdate()">Save</button>
+</div>
+
+<script>
+    let users = JSON.parse(localStorage.getItem("users") || "[]");
+    let updateId = null;
+
+    function loadTable() {
+        let table = document.getElementById("userTable");
+
+        users.forEach(user => {
+            let row = table.insertRow();
+            row.innerHTML = `
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td>${user.phone}</td>
+                <td>${user.username}</td>
+                <td>
+                    <button class="update" onclick="openUpdate(${user.id})">Update</button>
+                    <button class="delete" onclick="deleteUser(${user.id})">Delete</button>
+                </td>
+            `;
+        });
+    }
+
+    function openUpdate(id) {
+        let user = users.find(u => u.id === id);
+        updateId = id;
+
+        upName.value = user.name;
+        upEmail.value = user.email;
+        upPhone.value = user.phone;
+        upAddress.value = user.address;
+        upUsername.value = user.username;
+
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function saveUpdate() {
+        let user = users.find(u => u.id === updateId);
+
+        user.name = upName.value;
+        user.email = upEmail.value;
+        user.phone = upPhone.value;
+        user.address = upAddress.value;
+        user.username = upUsername.value;
+
+        localStorage.setItem("users", JSON.stringify(users));
+        alert("Updated Successfully!");
+        location.reload();
+    }
+
+    function deleteUser(id) {
+        users = users.filter(u => u.id !== id);
+        localStorage.setItem("users", JSON.stringify(users));
+        alert("Deleted Successfully!");
+        location.reload();
+    }
+
+    loadTable();
+</script>
+
+</body>
+</html>

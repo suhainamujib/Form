@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #d8b4fe, #a78bfa);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            width: 360px;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            animation: fadeIn 0.7s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #4c1d95;
+            font-weight: 600;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 15px;
+            border: 1px solid #d4d4d4;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 10px;
+            background: #6d28d9;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #5b21b6;
+        }
+
+        a {
+            text-decoration: none;
+            display: block;
+            margin-top: 15px;
+            text-align: center;
+            color: #4c1d95;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Register User</h2>
+
+    <form id="userForm">
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="tel" id="phone" placeholder="Phone Number" required>
+        <textarea id="address" placeholder="Address"></textarea>
+        <input type="text" id="username" placeholder="Username (optional)">
+        <button type="submit">Submit</button>
+    </form>
+
+    <a href="2nd.html">View User List →</a>
+</div>
+
+<script>
+    document.getElementById("userForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        let users = JSON.parse(localStorage.getItem("users") || "[]");
+
+        let newUser = {
+            id: Date.now(),
+            name: name.value,
+            email: email.value,
+            phone: phone.value,
+            address: address.value,
+            username: username.value
+        };
+
+        users.push(newUser);
+        localStorage.setItem("users", JSON.stringify(users));
+
+        alert("User Registered Successfully!");
+        this.reset();
+    });
+</script>
+
+</body>
+</html>
