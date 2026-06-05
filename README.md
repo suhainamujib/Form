@@ -1,9 +1,9 @@
-📂 User Registration & User List (Frontend Project)
+User Registration & User List (Frontend Project)
 
 This project contains two HTML pages that work together to collect user information and display it beautifully using localStorage as the database.
 
-✅ Pages Included
-1️⃣ 1st.html — User Registration Page
+ Pages Included
+1st.html — User Registration Page
 
 Users can enter:
 
@@ -21,7 +21,7 @@ Data is saved in localStorage
 
 Button to go to the User List page
 
-2️⃣ 2nd.html — User List Page
+2nd.html — User List Page
 
 Shows all registered users in a beautiful table
 
@@ -35,7 +35,7 @@ Popup form for editing
 
 Back button to return to Registration page
 
-🛠 Technologies Used
+ Technologies Used
 
 HTML
 
@@ -45,7 +45,7 @@ JavaScript
 
 LocalStorage
 
-🚀 How to Use
+ How to Use
 
 Keep both files in the same folder:
 
@@ -61,7 +61,7 @@ Click “View User List →” to open 2nd.html
 
 Update or delete users easily
 
-💡 Notes
+ Notes:
 
 No backend required
 
